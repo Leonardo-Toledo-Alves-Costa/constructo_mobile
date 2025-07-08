@@ -15,11 +15,26 @@ class MyApp extends StatelessWidget {
       title: 'Constructo App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.deepOrange,
+        primaryColor: Color(0xFFB24E00),
       appBarTheme: AppBarTheme(
         centerTitle: true,
-        backgroundColor: Colors.indigo,
-        foregroundColor: Colors.white
+        backgroundColor: Color(0xFF061D3D),
+        foregroundColor: Color(0xFFDFE9F5)
+        ),
+      textTheme: TextTheme(
+        headlineSmall: TextStyle(fontSize: 16, color: Color(0xFF061D3D)),
+        headlineMedium: TextStyle(fontSize: 18, color: Color(0xFF061D3D)),
+        bodySmall: TextStyle(fontSize: 16, color: Color(0xFFDFE9F5)),
+        bodyMedium: TextStyle(fontSize: 16, color: Color(0xFFDFE9F5)),
+          ),
+        textButtonTheme: TextButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            foregroundColor: Color(0xFFDFE9F5),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          ),
         ),
       ),
       routes: {
