@@ -1,6 +1,6 @@
-import 'package:constructo_project/pages/home_page.dart';
 import 'package:constructo_project/pages/welcome_page.dart';
 import 'package:constructo_project/utils/app_routes.dart';
+import 'package:constructo_project/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,21 +16,21 @@ class MyApp extends StatelessWidget {
       title: 'Constructo App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Color(0xFFB24E00),
+        primaryColor: AppColors.brandColor1,
       appBarTheme: AppBarTheme(
         centerTitle: true,
-        backgroundColor: Color(0xFF061D3D),
-        foregroundColor: Color(0xFFDFE9F5)
+        backgroundColor: AppColors.letterColorBlackBlue,
+        foregroundColor: AppColors.letterColorLightBlue,
         ),
       textTheme: TextTheme(
-        headlineSmall: TextStyle(fontSize: 16, color: Color(0xFF061D3D)),
-        headlineMedium: TextStyle(fontSize: 18, color: Color(0xFF061D3D)),
-        bodySmall: TextStyle(fontSize: 16, color: Color(0xFFDFE9F5)),
-        bodyMedium: TextStyle(fontSize: 16, color: Color(0xFFDFE9F5)),
+        headlineSmall: TextStyle(fontSize: 16, color: AppColors.letterColorBlackBlue),
+        headlineMedium: TextStyle(fontSize: 18, color: AppColors.letterColorBlackBlue),
+        bodySmall: TextStyle(fontSize: 16, color: AppColors.letterColorLightBlue),
+        bodyMedium: TextStyle(fontSize: 16, color: AppColors.letterColorLightBlue),
           ),
         textButtonTheme: TextButtonThemeData(
           style: ElevatedButton.styleFrom(
-            foregroundColor: Color(0xFFDFE9F5),
+            foregroundColor: AppColors.letterColorLightBlue,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),

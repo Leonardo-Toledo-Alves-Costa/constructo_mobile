@@ -1,3 +1,4 @@
+import 'package:constructo_project/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -6,7 +7,7 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF2F2F2),
+      backgroundColor: AppColors.backgroundColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -24,14 +25,14 @@ class WelcomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextButton(onPressed: () {},
-                    style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Color(0xFFB24E00)),
+                    style: ButtonStyle(backgroundColor: WidgetStateProperty.all(AppColors.brandColor0),
                     fixedSize: WidgetStateProperty.all(Size(100, 45)),
                     ), 
                     child: Text('Login'),
                     ),
                     SizedBox(width: 10),
                     TextButton(onPressed: () {},
-                    style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Color(0xFF061D3D)),
+                    style: ButtonStyle(backgroundColor: WidgetStateProperty.all(AppColors.secondaryColor0),
                     fixedSize: WidgetStateProperty.all(Size(100, 45)),
                     ), 
                     child: Text('Cadastro'),
@@ -43,6 +44,6 @@ class WelcomePage extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ); 
   }
 }
