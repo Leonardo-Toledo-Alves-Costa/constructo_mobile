@@ -1,7 +1,7 @@
+
 class AppRoutes {
   static const welcomepage = '/';
-  static const login = '/login';
-  static const cadastro = '/cadastro';
+  static const authpage = '/authpage';
   static const perfil = '/perfil';
   static const produtos = '/produtos';
   static const homepage = '/homepage';
@@ -9,4 +9,5 @@ class AppRoutes {
   static const registroBaixas = '/registro_baixas';
   static const cadastroProduto = '/cadastro_produto';
   static const cadastroEstoque = '/cadastro_estoque';
+
 }
