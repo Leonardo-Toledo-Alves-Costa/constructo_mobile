@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:';
 import 'package:constructo_project/pages/auth_page.dart';
 import 'package:constructo_project/pages/welcome_page.dart';
 import 'package:constructo_project/utils/app_routes.dart';

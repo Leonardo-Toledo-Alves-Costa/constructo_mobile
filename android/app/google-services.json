@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "754212719498",
+    "project_id": "constructo-app-34932",
+    "storage_bucket": "constructo-app-34932.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754212719498:android:615c37444519fa1033d673",
+        "android_client_info": {
+          "package_name": "com.asimov.constructoapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDU1zItG8G4QEE3K2MOwdL29axl9NBhAqY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754212719498:android:d99fa5e460b48e4c33d673",
+        "android_client_info": {
+          "package_name": "com.example.constructo_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDU1zItG8G4QEE3K2MOwdL29axl9NBhAqY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
