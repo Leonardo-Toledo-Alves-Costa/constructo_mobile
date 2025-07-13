@@ -10,6 +10,6 @@ abstract class AuthenticationService {
   Future<void> logout();
 
     factory AuthenticationService(){
-    return AuthFirebaseService();
+    return AuthenticationFirebaseService();
   }
 }
