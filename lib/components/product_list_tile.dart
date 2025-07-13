@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class ProductList extends StatelessWidget {
-  const ProductList({super.key});
+class ProductListTile extends StatelessWidget {
+  const ProductListTile({super.key});
 
   @override
   Widget build(BuildContext context) {

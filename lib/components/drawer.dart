@@ -42,7 +42,7 @@ class DrawerComponent extends StatelessWidget {
             leading: Icon(Icons.home_outlined, color: AppColors.letterColorBlackBlue),
             title: Text('Início', style: TextStyle(color: AppColors.letterColorBlackBlue)),
             onTap: () {
-              Navigator.pushNamed(context, '/home');
+              Navigator.pushNamed(context, '/homepage');
             },
           ),
           ListTile(

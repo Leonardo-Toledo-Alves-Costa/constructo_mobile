@@ -1,5 +1,5 @@
 import 'package:constructo_project/components/drawer.dart';
-import 'package:constructo_project/components/product_list.dart';
+import 'package:constructo_project/components/product_list_tile.dart';
 import 'package:flutter/material.dart';
 
 
@@ -58,7 +58,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ),
-        Expanded(child: ProductList()),
+        Expanded(child: ProductListTile()),
         ],
       ),
       drawer: DrawerComponent(),
