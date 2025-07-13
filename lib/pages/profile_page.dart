@@ -1,3 +1,4 @@
+import 'package:constructo_project/components/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:constructo_project/utils/app_colors.dart';
 
@@ -125,6 +126,7 @@ class ProfilePage extends StatelessWidget {
           ],
         ),
       ),
+      drawer: DrawerComponent(),
     );
   }
 }

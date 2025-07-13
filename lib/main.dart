@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       routes: {
-        AppRoutes.welcomepage: (context) => const WelcomePage(),
+        AppRoutes.welcomepage: (context) => const ProfilePage(),
       },
     );
   }

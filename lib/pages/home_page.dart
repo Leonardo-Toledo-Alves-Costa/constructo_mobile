@@ -1,3 +1,4 @@
+import 'package:constructo_project/components/drawer.dart';
 import 'package:constructo_project/components/product_list.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class HomePage extends StatelessWidget {
           IconButton(
             onPressed: () {},
             icon: Icon(Icons.person_pin),
-          )
+          ),
         ],
       ),
       body: Column(
@@ -60,6 +61,7 @@ class HomePage extends StatelessWidget {
         Expanded(child: ProductList()),
         ],
       ),
+      drawer: DrawerComponent(),
       );
   }
 }
