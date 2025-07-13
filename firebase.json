@@ -1,1 +1,34 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"constructo-app-34932","appId":"1:754212719498:android:d99fa5e460b48e4c33d673","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"constructo-app-34932","configurations":{"android":"1:754212719498:android:d99fa5e460b48e4c33d673","ios":"1:754212719498:ios:14fdafda033046af33d673"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "constructo-app-34932",
+          "appId": "1:754212719498:android:d99fa5e460b48e4c33d673",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "constructo-app-34932",
+          "configurations": {
+            "android": "1:754212719498:android:d99fa5e460b48e4c33d673",
+            "ios": "1:754212719498:ios:14fdafda033046af33d673"
+          }
+        }
+      }
+    }
+  },
+  "firestore": {
+    "database": "(default)",
+    "location": "nam5",
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "database": {
+    "rules": "database.rules.json"
+  }
+}

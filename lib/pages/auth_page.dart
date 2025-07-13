@@ -9,7 +9,7 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
-  bool _isLoading = false;
+  final bool _isLoading = false;
 
 
   @override
