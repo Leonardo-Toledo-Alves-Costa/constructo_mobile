@@ -1,8 +1,11 @@
+import 'package:constructo_project/components/baixa_list.dart';
 import 'package:constructo_project/components/stock_list.dart';
 import 'package:constructo_project/pages/filter_page.dart';
 import 'package:constructo_project/pages/home_page.dart';
 import 'package:constructo_project/pages/profile_page.dart';
+import 'package:constructo_project/pages/register_baixa_page.dart';
 import 'package:constructo_project/pages/register_stock_page.dart';
+import 'package:constructo_project/pages/registro_baixas_page.dart';
 import 'package:constructo_project/pages/stock_page.dart';
 import 'package:constructo_project/pages/welcome_page.dart';
 import 'package:constructo_project/utils/app_routes.dart';
@@ -21,6 +24,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => StockList()),
+        ChangeNotifierProvider(create: (context) => BaixaList()),
       ],
       child: MaterialApp(
         title: 'Constructo App',
@@ -48,7 +52,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        initialRoute: AppRoutes.welcomepage,
+        initialRoute: AppRoutes.homepage,
         routes: {
           AppRoutes.welcomepage: (context) => const WelcomePage(),
           AppRoutes.cadastroEstoque: (context) => const RegisterStockPage(),
@@ -56,6 +60,8 @@ class MyApp extends StatelessWidget {
           AppRoutes.estoque: (context) => const StockPage(),
           AppRoutes.perfil: (context) => const ProfilePage(),
           AppRoutes.filtroEstoque: (context) => const FilterPage(),
+          AppRoutes.registroBaixas: (context) => const RegistroBaixasPage(),
+          AppRoutes.cadastroBaixa: (context) => const RegisterBaixaPage(),
         },
       ),
     );

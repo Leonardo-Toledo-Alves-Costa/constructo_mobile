@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.person_pin),
+            icon: Icon(Icons.person_pin, size: 35,),
           ),
         ],
       ),

@@ -21,7 +21,12 @@ class DrawerComponent extends StatelessWidget {
                   alignment: Alignment.bottomLeft,
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: Icon(Icons.close, size: 30, color: AppColors.letterColorBlackBlue),
+                    child: IconButton(
+                      icon: Icon(Icons.close, size: 30, color: AppColors.letterColorBlackBlue),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
                   ),
                 ),
                 Align(

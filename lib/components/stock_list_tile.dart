@@ -11,8 +11,7 @@ class StockListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final stocklist = Provider.of<StockList>(context);
     final stocks = stocklist.stocks;
-    return ListTile(
-      title: ListView.builder(
+    return ListView.builder(
         shrinkWrap: true,
         itemCount: stocks.length,
         itemBuilder: (context, index) {
@@ -28,8 +27,6 @@ class StockListTile extends StatelessWidget {
             ),
           );
         },
-      ),
-    );
-
+      );
   }
 }

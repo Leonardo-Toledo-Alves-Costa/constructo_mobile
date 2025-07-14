@@ -9,5 +9,6 @@ class AppRoutes {
   static const registroBaixas = '/registro_baixas';
   static const cadastroProduto = '/cadastro_produto';
   static const cadastroEstoque = '/cadastro_estoque';
+  static const cadastroBaixa = '/cadastro_baixa';
   static const filtroEstoque = '/filtro_estoque';
 }
