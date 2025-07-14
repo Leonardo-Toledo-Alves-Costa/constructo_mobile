@@ -7,7 +7,7 @@ class RegisterStockPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final ListTipos = [
+    final List<String> tipos = [
       'Tijolo e Blocos',
       'Ferragens e Metais',
       'Ferramentas e Equipamentos',
@@ -131,13 +131,17 @@ class RegisterStockPage extends StatelessWidget {
                 FormField(builder: (FormFieldState state) {
                   return InputDecorator(
                     decoration: InputDecoration(
-                      labelText: 'Selecione o tipo de produto',
                       border: OutlineInputBorder(),
+                      contentPadding: EdgeInsets.symmetric(vertical: 3.0, horizontal: 10.0),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
                     ),
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton<String>(
                         isExpanded: true,
-                        items: ListTipos.map((String value) {
+                        hint: Text('Escolha o tipo'),
+                        items: tipos.map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(value),

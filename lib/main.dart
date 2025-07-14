@@ -1,4 +1,5 @@
 import 'package:constructo_project/components/stock_list.dart';
+import 'package:constructo_project/pages/filter_page.dart';
 import 'package:constructo_project/pages/home_page.dart';
 import 'package:constructo_project/pages/profile_page.dart';
 import 'package:constructo_project/pages/register_stock_page.dart';
@@ -47,12 +48,14 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
+        initialRoute: AppRoutes.welcomepage,
         routes: {
           AppRoutes.welcomepage: (context) => const WelcomePage(),
           AppRoutes.cadastroEstoque: (context) => const RegisterStockPage(),
           AppRoutes.homepage: (context) => const HomePage(),
           AppRoutes.estoque: (context) => const StockPage(),
           AppRoutes.perfil: (context) => const ProfilePage(),
+          AppRoutes.filtroEstoque: (context) => const FilterPage(),
         },
       ),
     );
