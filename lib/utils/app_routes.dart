@@ -1,7 +1,8 @@
 
 class AppRoutes {
   static const welcomepage = '/';
-  static const authpage = '/authpage';
+  static const singuppage = '/singup';
+  static const loginpage = '/login';
   static const perfil = '/perfil';
   static const produtos = '/produtos';
   static const homepage = '/homepage';

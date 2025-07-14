@@ -34,7 +34,7 @@ class WelcomePage extends StatelessWidget {
                     SizedBox(width: 10),
                     TextButton(onPressed: () {
                       Navigator.pushNamed(context,
-                      AppRoutes.authpage
+                      AppRoutes.singuppage
                       );
                     },
                     style: ButtonStyle(backgroundColor: WidgetStateProperty.all(AppColors.secondaryColor0),

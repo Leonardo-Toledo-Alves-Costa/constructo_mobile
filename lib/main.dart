@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:';
-import 'package:constructo_project/pages/auth_page.dart';
+import 'firebase_options.dart';
+import 'package:constructo_project/pages/singup_page.dart';
 import 'package:constructo_project/pages/welcome_page.dart';
 import 'package:constructo_project/utils/app_routes.dart';
 import 'package:constructo_project/utils/app_colors.dart';
-import 'package:flutter/material.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlataform,
+    options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const MyApp());
 }
@@ -49,7 +47,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         AppRoutes.welcomepage: (context) => const WelcomePage(),
-        AppRoutes.authpage: (context) => const AuthPage(),
+        AppRoutes.singuppage: (context) => const SingupPage(),
       },
     );
   }
