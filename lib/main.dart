@@ -1,9 +1,10 @@
+import 'package:constructo_project/pages/login_page.dart';
+import 'package:constructo_project/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'package:constructo_project/pages/singup_page.dart';
+import 'package:constructo_project/pages/signup_page.dart';
 import 'package:constructo_project/pages/welcome_page.dart';
-import 'package:constructo_project/utils/app_routes.dart';
 import 'package:constructo_project/utils/app_colors.dart';
 
 void main() async{
@@ -45,9 +46,11 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
+      initialRoute: AppRoutes.welcomepage,
       routes: {
         AppRoutes.welcomepage: (context) => const WelcomePage(),
-        AppRoutes.singuppage: (context) => const SingupPage(),
+        AppRoutes.signuppage: (context) => const SignupPage(),
+        AppRoutes.loginpage: (context) => const LoginPage(),
       },
     );
   }

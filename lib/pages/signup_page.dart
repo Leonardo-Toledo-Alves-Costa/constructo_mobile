@@ -1,15 +1,16 @@
+import 'package:constructo_project/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import '../components/singup_form.dart';
 import '../services/authentication/authentication_firebase_service.dart';
 
-class SingupPage extends StatefulWidget {
-  const SingupPage({super.key});
+class SignupPage extends StatefulWidget {
+  const SignupPage({super.key});
 
   @override
-  State<SingupPage> createState() => _CadastroPageState();
+  State<SignupPage> createState() => _SignupPageState();
 }
 
-class _CadastroPageState extends State<SingupPage> {
+class _SignupPageState extends State<SignupPage> {
   String? nome;
   String? sobrenome;
   String? email;
@@ -52,7 +53,7 @@ void _realizarCadastro() async {
     );
     Future.delayed(const Duration(seconds: 5), () {
       if (!mounted) return;
-      Navigator.pushReplacementNamed(context, '/login');
+      Navigator.pushNamed(context, AppRoutes.loginpage);
     });
   } else {
     ScaffoldMessenger.of(context).showSnackBar(

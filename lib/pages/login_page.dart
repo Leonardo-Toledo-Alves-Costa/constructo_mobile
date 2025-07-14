@@ -1,3 +1,4 @@
+import 'package:constructo_project/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import '../services/authentication/authentication_firebase_service.dart';
 
@@ -58,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
               child: const Text('Entrar'),
             ),
             TextButton(
-              onPressed: () => Navigator.pushReplacementNamed(context, '/cadastro'),
+              onPressed: () => Navigator.pushNamed(context, AppRoutes.signuppage),
               child: const Text('Criar Conta'),
             ),
           ],
