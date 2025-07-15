@@ -1,5 +1,6 @@
 import 'package:constructo_project/components/drawer.dart';
 import 'package:constructo_project/components/product_list_tile.dart';
+import 'package:constructo_project/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 
@@ -28,15 +29,14 @@ class HomePage extends StatelessWidget {
                 width: 350,
                 height: 200,
                 child: Card(
-                  color: Color(0xFF061D3D),
-          
+                  color: AppColors.letterColorBlackBlue,
                   elevation: 4,
                   child: Container(
                     padding: EdgeInsets.all(20.0),
                     alignment: Alignment.bottomCenter,
                     child: Text('Bem Vindo, Usuário',
                       style: TextStyle(
-                        color: Color(0xFFDFE9F5),
+                        color: AppColors.letterColorLightBlue,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
@@ -51,7 +51,7 @@ class HomePage extends StatelessWidget {
             child: Text(
               'Materiais em Falta',
               style: TextStyle(
-                color: Color(0xFF061D3D),
+                color: AppColors.letterColorBlackBlue,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),

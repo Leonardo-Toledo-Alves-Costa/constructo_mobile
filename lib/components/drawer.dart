@@ -1,6 +1,5 @@
 import 'package:constructo_project/utils/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:constructo_project/utils/app_colors.dart';
 
 class DrawerComponent extends StatelessWidget {
   const DrawerComponent({super.key});

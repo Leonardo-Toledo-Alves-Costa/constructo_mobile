@@ -1,10 +1,7 @@
 import 'package:constructo_project/components/drawer.dart';
-import 'package:constructo_project/components/stock_list.dart';
 import 'package:constructo_project/components/stock_list_tile.dart';
 import 'package:constructo_project/utils/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:constructo_project/components/stock.dart';
-import 'package:provider/provider.dart';
 
 class StockPage extends StatelessWidget {
   const StockPage({super.key});

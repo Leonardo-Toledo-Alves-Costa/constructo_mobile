@@ -1,4 +1,3 @@
-import 'package:constructo_project/components/stock.dart';
 import 'package:constructo_project/components/stock_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
