@@ -1,4 +1,3 @@
-import 'package:constructo_project/pages/login_page.dart';
 import 'package:constructo_project/utils/app_colors.dart';
 import 'package:constructo_project/utils/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +25,7 @@ class WelcomePage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    TextButton(onPressed: () => Navigator.pushReplacementNamed(context, 'login')
+                    TextButton(onPressed: () => Navigator.pushNamed(context, AppRoutes.loginpage)
                     ,
                     style: ButtonStyle(backgroundColor: WidgetStateProperty.all(AppColors.brandColor0),
                     fixedSize: WidgetStateProperty.all(Size(100, 45)),

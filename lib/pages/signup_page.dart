@@ -1,3 +1,4 @@
+import 'package:constructo_project/utils/app_colors.dart';
 import 'package:constructo_project/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import '../components/singup_form.dart';
@@ -24,7 +25,15 @@ void _realizarCadastro() async {
   if (_senhaController.text != _confirmarSenhaController.text) {
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('As senhas não coincidem')),
+      const SnackBar(
+        content: 
+        Text('As senhas não coincidem',
+        textAlign: TextAlign.center, 
+        style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: AppColors.alertColor,
+        duration: Duration(seconds: 1),
+      ),
     );
     return;
   }
@@ -57,7 +66,8 @@ void _realizarCadastro() async {
     });
   } else {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Erro ao criar conta')),
+      const SnackBar(content:
+       Text('Erro ao criar conta')),
     );
   }
 }
