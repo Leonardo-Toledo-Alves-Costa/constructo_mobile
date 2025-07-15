@@ -1,11 +1,21 @@
+import 'dart:io';
+
 import 'package:constructo_project/components/drawer.dart';
+import 'package:constructo_project/components/user_firebase.dart';
 import 'package:constructo_project/services/authentication/authentication_firebase_service.dart';
 import 'package:constructo_project/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:constructo_project/utils/app_colors.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  final _userFirebase = UserFirebase();
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +23,15 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         title: Column(
           children: [
-            Icon(Icons.person_pin, size: 200),
+            StreamBuilder(
+              stream: _userFirebase.userStream,
+              builder: (context, snapshot) {
+                final user = snapshot.data;
+                return Image.file(
+                  File(user?.imageURL ?? ''),
+                );
+              },
+            ),
             Text(
               'Usuário',
               style: TextStyle(
@@ -28,22 +46,23 @@ class ProfilePage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+        child: StreamBuilder(stream: _userFirebase.userStream, builder: (context, snapshot) {
+              final user = snapshot.data;
+              return Column(
+                children: [
             SizedBox(
               height: 20,
             ),
             Text(
-              'Nome Completo: ',
+              'Nome:',
               style: TextStyle(
                 color: AppColors.letterColorBlackBlue,
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Text('Usuário 1',
+            Text(
+              user?.name ?? '',
               style: TextStyle(
                 color: AppColors.letterColorBlackBlue,
                 fontSize: 18,
@@ -58,7 +77,7 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 10),
-            Text('usuario1@gmail.com',
+            Text(user?.email ?? '',
               style: TextStyle(
                 color: AppColors.letterColorBlackBlue,
                 fontSize: 18,
@@ -73,7 +92,7 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 10),
-            Text('11.123.569',
+            Text(user?.id ?? '',
               style: TextStyle(
                 color: AppColors.letterColorBlackBlue,
                 fontSize: 18,
@@ -88,7 +107,7 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 10),
-            Text('Leitor',
+            Text(user?.role ?? '',
               style: TextStyle(
                 color: AppColors.letterColorBlackBlue,
                 fontSize: 18,
@@ -128,10 +147,10 @@ class ProfilePage extends StatelessWidget {
                 ),
                 child: Text('Sair dessa conta'),
               ),
-            )
-
-          ],
-        ),
+              ),
+            ],
+            );
+          }),
       ),
       drawer: DrawerComponent(),
     );

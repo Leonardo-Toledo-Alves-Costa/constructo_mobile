@@ -15,12 +15,12 @@ class FirebaseAuthService {
     return "$dois.$tres.$quatro";
   }
 
-  // Criação de usuário com Firestore
   Future<String?> registrarUsuarioComFirestore({
     required String nome,
     required String sobrenome,
     required String email,
     required String senha,
+    required String imageURL,
   }) async {
     try {
       final userCredential = await _auth.createUserWithEmailAndPassword(
@@ -34,6 +34,7 @@ class FirebaseAuthService {
         'nome': nome,
         'sobrenome': sobrenome,
         'email': email,
+        'imageURL': imageURL,
         'employeeCode': employeeCode,
         'role': 'leitor', 
         'uid': userCredential.user!.uid,
