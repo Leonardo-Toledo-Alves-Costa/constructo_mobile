@@ -1,6 +1,6 @@
-
 import 'package:constructo_project/components/drawer.dart';
 import 'package:constructo_project/components/product_list_tile.dart';
+import 'package:constructo_project/components/user_firebase.dart';
 import 'package:constructo_project/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -10,13 +10,16 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _userFirebase = UserFirebase();
     return Scaffold(
       appBar: AppBar(
         title: Image.asset('assets/images/Logo.png', height: 40),
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/profile');
+            },
             icon: Icon(Icons.person_pin, size: 35,),
           ),
         ],
@@ -32,16 +35,22 @@ class HomePage extends StatelessWidget {
                 child: Card(
                   color: AppColors.letterColorBlackBlue,
                   elevation: 4,
-                  child: Container(
-                    padding: EdgeInsets.all(20.0),
-                    alignment: Alignment.bottomCenter,
-                    child: Text('Bem Vindo, Usuário',
-                      style: TextStyle(
-                        color: AppColors.letterColorLightBlue,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                  child: StreamBuilder(
+                    stream: _userFirebase.userStream,
+                    builder: (context, snapshot) {
+                      final usuario = snapshot.data;
+                      return Container(
+                        padding: EdgeInsets.all(20.0),
+                        alignment: Alignment.bottomCenter,
+                        child: Text('Bem Vindo, ${usuario?.name}',
+                          style: TextStyle(
+                            color: AppColors.letterColorLightBlue,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      );
+                    }
                   ),
                 ),
               ),

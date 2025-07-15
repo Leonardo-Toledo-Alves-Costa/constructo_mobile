@@ -12,4 +12,5 @@ class AppRoutes {
   static const cadastroEstoque = '/cadastro_estoque';
   static const cadastroBaixa = '/cadastro_baixa';
   static const filtroEstoque = '/filtro_estoque';
+  static const mudarsenha = '/mudarsenha';
 }

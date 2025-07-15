@@ -1,4 +1,5 @@
 
+import 'package:constructo_project/pages/change_password_page.dart';
 import 'package:constructo_project/pages/login_page.dart';
 import 'package:constructo_project/utils/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -74,6 +75,7 @@ class MyApp extends StatelessWidget {
           AppRoutes.filtroEstoque: (context) => const FilterPage(),
           AppRoutes.registroBaixas: (context) => const RegistroBaixasPage(),
           AppRoutes.cadastroBaixa: (context) => const RegisterBaixaPage(),
+          AppRoutes.mudarsenha: (context) => const ChangePasswordPage(),
         },
       ),
     );

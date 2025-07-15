@@ -15,6 +15,7 @@ class _SignupPageState extends State<SignupPage> {
   String? nome;
   String? sobrenome;
   String? email;
+  String imageURL = '1';
 
   final _senhaController = TextEditingController();
   final _confirmarSenhaController = TextEditingController();
@@ -43,6 +44,7 @@ void _realizarCadastro() async {
   sobrenome: sobrenome!,
   email: email!,
   senha: _senhaController.text,
+  imageURL: imageURL,
 );
 
   if (!mounted) return;
@@ -86,10 +88,11 @@ void _realizarCadastro() async {
         padding: const EdgeInsets.all(16.0),
         child: nome == null
             ? CadastroForm(
-                onNext: (n, s, e) => setState(() {
+                onNext: (n, s, e, i) => setState(() {
                   nome = n;
                   sobrenome = s;
                   email = e;
+                  imageURL = i;
                 }),
               )
             : Column(

@@ -74,6 +74,12 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, AppRoutes.mudarsenha);
+              },
+              child: const Text('Esqueci minha senha', style: TextStyle(color: AppColors.letterColorBlackBlue)),
+            ),
+            ElevatedButton(
               onPressed: _fazerLogin,
               style: ButtonStyle(
                 backgroundColor: WidgetStateProperty.all(AppColors.brandColor0),
