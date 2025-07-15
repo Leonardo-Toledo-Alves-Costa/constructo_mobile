@@ -117,7 +117,9 @@ class _ProfilePageState extends State<ProfilePage> {
             SizedBox(
               width: double.infinity,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, AppRoutes.mudarsenha);
+                },
                 style: TextButton.styleFrom(
                   backgroundColor: AppColors.letterColorBlackBlue,
                   foregroundColor: AppColors.letterColorLightBlue,

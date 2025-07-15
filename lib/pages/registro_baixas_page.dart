@@ -14,7 +14,9 @@ class RegistroBaixasPage extends StatelessWidget {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/profile');
+            },
             icon: Icon(Icons.person_pin, size: 35),
           ),
         ],

@@ -1,3 +1,4 @@
+import 'package:constructo_project/utils/app_colors.dart';
 import 'package:constructo_project/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import '../services/authentication/authentication_firebase_service.dart';
@@ -55,6 +56,12 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, AppRoutes.mudarsenha);
+              },
+              child: const Text('Esqueci minha senha', style: TextStyle(color: AppColors.letterColorBlackBlue)),
+            ),
             ElevatedButton(
               onPressed: _fazerLogin,
               child: const Text('Entrar'),
