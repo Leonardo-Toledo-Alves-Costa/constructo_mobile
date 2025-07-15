@@ -38,11 +38,16 @@ void _realizarCadastro() async {
     return;
   }
 
-  final id = await FirebaseAuthService().registrarUsuario(email!, _senhaController.text);
+  final employeeCode = await FirebaseAuthService().registrarUsuarioComFirestore(
+  nome: nome!,
+  sobrenome: sobrenome!,
+  email: email!,
+  senha: _senhaController.text,
+);
 
   if (!mounted) return;
 
-  if (id != null) {
+  if (employeeCode != null) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         backgroundColor: Colors.green,
@@ -53,7 +58,7 @@ void _realizarCadastro() async {
             Text('Parabéns $nome! Sua conta foi criada com sucesso!',
                 style: const TextStyle(color: Colors.white)),
             const SizedBox(height: 10),
-            Text('Seu código de identificação é:\n$id',
+            Text('Seu código de identificação é:\n$employeeCode',
                 textAlign: TextAlign.center,
                 style: const TextStyle(color: Colors.white)),
           ],
@@ -62,7 +67,7 @@ void _realizarCadastro() async {
     );
     Future.delayed(const Duration(seconds: 5), () {
       if (!mounted) return;
-      Navigator.pushNamed(context, AppRoutes.loginpage);
+      Navigator.pushNamed(context, AppRoutes.homepage);
     });
   } else {
     ScaffoldMessenger.of(context).showSnackBar(

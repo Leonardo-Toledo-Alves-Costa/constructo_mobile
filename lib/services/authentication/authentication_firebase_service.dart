@@ -1,11 +1,13 @@
 import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseAuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // Geração de ID único no formato xx.xxx.xxxx
-  String gerarIdUnico() {
+  // Geração de employeeCode no formato xx.xxx.xxxx
+  String gerarEmployeeCode() {
     final rand = Random();
     String dois = rand.nextInt(90 + 10).toString().padLeft(2, '0');
     String tres = rand.nextInt(900).toString().padLeft(3, '0');
@@ -13,11 +15,32 @@ class FirebaseAuthService {
     return "$dois.$tres.$quatro";
   }
 
-  // Criação de usuário com ID retornado
-  Future<String?> registrarUsuario(String email, String senha) async {
+  // Criação de usuário com Firestore
+  Future<String?> registrarUsuarioComFirestore({
+    required String nome,
+    required String sobrenome,
+    required String email,
+    required String senha,
+  }) async {
     try {
-      await _auth.createUserWithEmailAndPassword(email: email, password: senha);
-      return gerarIdUnico(); // ID retornado
+      final userCredential = await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: senha,
+      );
+
+      final String employeeCode = gerarEmployeeCode();
+
+      await _firestore.collection('users').doc(userCredential.user!.uid).set({
+        'nome': nome,
+        'sobrenome': sobrenome,
+        'email': email,
+        'employeeCode': employeeCode,
+        'role': 'leitor', 
+        'uid': userCredential.user!.uid,
+        'criado_em': DateTime.now(),
+      });
+
+      return employeeCode;
     } catch (e) {
       print('Erro ao criar conta: $e');
       return null;

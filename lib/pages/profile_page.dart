@@ -1,4 +1,6 @@
 import 'package:constructo_project/components/drawer.dart';
+import 'package:constructo_project/services/authentication/authentication_firebase_service.dart';
+import 'package:constructo_project/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:constructo_project/utils/app_colors.dart';
 
@@ -111,7 +113,12 @@ class ProfilePage extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                await FirebaseAuthService().logout();
+                  if (context.mounted) {
+                  Navigator.pushReplacementNamed(context, AppRoutes.loginpage); 
+              }  
+                },
                 style: ElevatedButton.styleFrom(
                   foregroundColor: AppColors.alertColor,
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

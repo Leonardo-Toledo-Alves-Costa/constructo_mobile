@@ -24,6 +24,7 @@ class _LoginPageState extends State<LoginPage> {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Login realizado com sucesso!')),
     );
+    Navigator.pushNamed(context, AppRoutes.homepage);
   } else {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Erro ao fazer login')),
