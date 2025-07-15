@@ -48,6 +48,7 @@ class MyApp extends StatelessWidget {
         textTheme: TextTheme(
           headlineSmall: TextStyle(fontSize: 16, color: Color(0xFF061D3D)),
           headlineMedium: TextStyle(fontSize: 18, color: Color(0xFF061D3D)),
+          headlineLarge: TextStyle(fontSize: 30, color: Color(0xFF061D3D)),
           bodySmall: TextStyle(fontSize: 16, color: Color(0xFFDFE9F5)),
           bodyMedium: TextStyle(fontSize: 16, color: Color(0xFFDFE9F5)),
             ),
