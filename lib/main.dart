@@ -1,3 +1,4 @@
+
 import 'package:constructo_project/pages/login_page.dart';
 import 'package:constructo_project/utils/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,16 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:constructo_project/pages/signup_page.dart';
 import 'package:constructo_project/pages/welcome_page.dart';
-import 'package:constructo_project/utils/app_colors.dart';
+import 'package:constructo_project/components/baixa_list.dart';
+import 'package:constructo_project/components/stock_list.dart';
+import 'package:constructo_project/pages/filter_page.dart';
+import 'package:constructo_project/pages/home_page.dart';
+import 'package:constructo_project/pages/profile_page.dart';
+import 'package:constructo_project/pages/register_baixa_page.dart';
+import 'package:constructo_project/pages/register_stock_page.dart';
+import 'package:constructo_project/pages/registro_baixas_page.dart';
+import 'package:constructo_project/pages/stock_page.dart';
+import 'package:provider/provider.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,38 +30,51 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Constructo App',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: AppColors.brandColor1,
-      appBarTheme: AppBarTheme(
-        centerTitle: true,
-        backgroundColor: AppColors.letterColorBlackBlue,
-        foregroundColor: AppColors.letterColorLightBlue,
-        ),
-      textTheme: TextTheme(
-        headlineSmall: TextStyle(fontSize: 16, color: AppColors.letterColorBlackBlue),
-        headlineMedium: TextStyle(fontSize: 18, color: AppColors.letterColorBlackBlue),
-        bodySmall: TextStyle(fontSize: 16, color: AppColors.letterColorLightBlue),
-        bodyMedium: TextStyle(fontSize: 16, color: AppColors.letterColorLightBlue),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => StockList()),
+        ChangeNotifierProvider(create: (context) => BaixaList()),
+      ],
+      child: MaterialApp(
+        title: 'Constructo App',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primaryColor: Color(0xFFB24E00),
+        appBarTheme: AppBarTheme(
+          centerTitle: true,
+          backgroundColor: Color(0xFF061D3D),
+          foregroundColor: Color(0xFFDFE9F5)
           ),
-        textButtonTheme: TextButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            foregroundColor: AppColors.letterColorLightBlue,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
+        textTheme: TextTheme(
+          headlineSmall: TextStyle(fontSize: 16, color: Color(0xFF061D3D)),
+          headlineMedium: TextStyle(fontSize: 18, color: Color(0xFF061D3D)),
+          bodySmall: TextStyle(fontSize: 16, color: Color(0xFFDFE9F5)),
+          bodyMedium: TextStyle(fontSize: 16, color: Color(0xFFDFE9F5)),
             ),
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          textButtonTheme: TextButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Color(0xFFDFE9F5),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            ),
           ),
         ),
+        initialRoute: AppRoutes.welcomepage,
+        routes: {
+          AppRoutes.welcomepage: (context) => const WelcomePage(),
+          AppRoutes.signuppage: (context) => const SignupPage(),
+          AppRoutes.loginpage: (context) => const LoginPage(),
+          AppRoutes.homepage: (context) => const HomePage(),
+          AppRoutes.cadastroEstoque: (context) => const RegisterStockPage(),
+          AppRoutes.estoque: (context) => const StockPage(),
+          AppRoutes.perfil: (context) => const ProfilePage(),
+          AppRoutes.filtroEstoque: (context) => const FilterPage(),
+          AppRoutes.registroBaixas: (context) => const RegistroBaixasPage(),
+          AppRoutes.cadastroBaixa: (context) => const RegisterBaixaPage(),
+        },
       ),
-      initialRoute: AppRoutes.welcomepage,
-      routes: {
-        AppRoutes.welcomepage: (context) => const WelcomePage(),
-        AppRoutes.signuppage: (context) => const SignupPage(),
-        AppRoutes.loginpage: (context) => const LoginPage(),
-      },
     );
   }
 }

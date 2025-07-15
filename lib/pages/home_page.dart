@@ -1,4 +1,6 @@
-import 'package:constructo_project/components/product_list.dart';
+
+import 'package:constructo_project/components/drawer.dart';
+import 'package:constructo_project/components/product_list_tile.dart';
 import 'package:constructo_project/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -15,8 +17,8 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.person_pin),
-          )
+            icon: Icon(Icons.person_pin, size: 35,),
+          ),
         ],
       ),
       body: Column(
@@ -57,9 +59,10 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ),
-        Expanded(child: ProductList()),
+        Expanded(child: ProductListTile()),
         ],
       ),
+      drawer: DrawerComponent(),
       );
   }
 }
