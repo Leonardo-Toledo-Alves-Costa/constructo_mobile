@@ -29,9 +29,17 @@ class _LoginPageState extends State<LoginPage> {
       );
       Navigator.pushNamed(context, AppRoutes.homepage);
     } else {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('Erro ao fazer login')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Erro ao fazer login, e-mail ou senha inválidos',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: AppColors.alertColor,
+          duration: Duration(seconds: 2),
+        ),
+      );
     }
   }
 
@@ -46,23 +54,62 @@ class _LoginPageState extends State<LoginPage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Entrar',
-              style: Theme.of(context).textTheme.headlineLarge,
-              textAlign: TextAlign.start,
+            SizedBox(height: 15),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: const Text(
+                'Entrar',
+                style: TextStyle(
+                  color: AppColors.secondaryColor0,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                ),
+              ),
             ),
-            SizedBox(height: 15.0),
+            SizedBox(height: 30.0),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'E-mail',
+                style: TextStyle(
+                  color: AppColors.secondaryColor0,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
+            ),
             TextField(
               controller: _emailController,
-              decoration: const InputDecoration(labelText: 'E-mail'),
+              decoration: InputDecoration(
+                labelText: 'E-mail',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+              ),
+            ),
+            SizedBox(height: 16),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Senha',
+                style: TextStyle(
+                  color: AppColors.secondaryColor0,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
             ),
             TextField(
               controller: _senhaController,
               obscureText: !_mostrarSenha,
               decoration: InputDecoration(
                 labelText: 'Senha',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                 suffixIcon: IconButton(
                   icon: Icon(
                     _mostrarSenha ? Icons.visibility : Icons.visibility_off,
@@ -72,29 +119,50 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.mudarsenha);
-              },
-              child: const Text('Esqueci minha senha', style: TextStyle(color: AppColors.letterColorBlackBlue)),
-            ),
-            ElevatedButton(
-              onPressed: _fazerLogin,
-              style: ButtonStyle(
-                backgroundColor: WidgetStateProperty.all(AppColors.brandColor0),
-                foregroundColor: WidgetStateProperty.all(Colors.white)
-              ),
-              child: const Text('Entrar'),
-            ),
+            const SizedBox(height: 15),
             TextButton(
               onPressed: () =>
-                  Navigator.pushNamed(context, AppRoutes.signuppage),
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all(Colors.white),
-                    foregroundColor: WidgetStateProperty.all(AppColors.secondaryColor0)
+                  Navigator.pushReplacementNamed(context, '/mudarsenha'),
+              child: const Text(
+                'Esqueci minha senha',
+                style: TextStyle(color: AppColors.letterColorBlackBlue),
+              ),
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: _fazerLogin,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.brandColor0,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
                   ),
-              child: const Text('Criar Conta'),
+                ),
+                child: const Text(
+                  'Entrar',
+                  style: TextStyle(color: AppColors.letterColorLightBlue),
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton(
+                onPressed: () =>
+                    Navigator.pushReplacementNamed(context, '/signup'),
+                style: OutlinedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  side: const BorderSide(color: AppColors.secondaryColor0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                child: const Text(
+                  'Criar Conta',
+                  style: TextStyle(color: AppColors.letterColorBlackBlue),
+                ),
+              ),
             ),
           ],
         ),

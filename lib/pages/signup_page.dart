@@ -53,20 +53,23 @@ class _SignupPageState extends State<SignupPage> {
     if (employeeCode != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          backgroundColor: Colors.green,
+          elevation: 10,
+          backgroundColor: AppColors.backgroundColor,
           duration: const Duration(seconds: 5),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Parabéns $nome! Sua conta foi criada com sucesso!',
-                style: const TextStyle(color: Colors.white),
+                'Parabéns $nome, sua conta foi criada com sucesso!',
+                style: const TextStyle(color: AppColors.letterColorBlackBlue),
               ),
+              SizedBox(height: 5),
+              Icon(Icons.check_circle, color: AppColors.confirmationColor),
               const SizedBox(height: 10),
               Text(
                 'Seu código de identificação é:\n$employeeCode',
                 textAlign: TextAlign.center,
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: AppColors.letterColorBlackBlue),
               ),
             ],
           ),
@@ -77,9 +80,17 @@ class _SignupPageState extends State<SignupPage> {
         Navigator.pushNamed(context, AppRoutes.homepage);
       });
     } else {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('Erro ao criar conta')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Por favor, preencha todas as informações antes de continuar',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: AppColors.alertColor,
+          duration: Duration(seconds: 2),
+        ),
+      );
     }
   }
 
