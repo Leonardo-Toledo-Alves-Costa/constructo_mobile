@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:constructo_project/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -38,18 +39,20 @@ class _UserImagePickerState extends State<UserImagePicker> {
       children: [
         CircleAvatar(
           radius: 40,
-          backgroundColor: Colors.grey,
-          backgroundImage: _image != null ? FileImage(_image!) : null,
+          backgroundColor: AppColors.backgroundColor,
+          backgroundImage: _image != null ? FileImage(_image!) : const AssetImage('assets/images/avatar.png'),
+          foregroundColor: AppColors.secondaryColor0,
         ),
         TextButton(
           onPressed: _pickImage, 
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.image, color: Theme.of(context).primaryColor,
+              Icon(Icons.image, color: AppColors.secondaryColor0,
               ),
               SizedBox(),
-              Text('Adicionar nova imagem'),
+              Text('Adicionar nova imagem',
+              style: Theme.of(context).textTheme.headlineSmall),
             ],
           )
         )

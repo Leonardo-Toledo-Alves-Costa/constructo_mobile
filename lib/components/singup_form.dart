@@ -21,6 +21,21 @@ class _CadastroFormState extends State<CadastroForm> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              'Cadastrar',
+              style: TextStyle(
+                color: AppColors.secondaryColor0,
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 20),
         UserImagePicker(
           onImagePick: (image) {
             setState(() {
@@ -28,35 +43,108 @@ class _CadastroFormState extends State<CadastroForm> {
             });
           },
         ),
-
-        const SizedBox(height: 20),
+        const SizedBox(height: 35),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            'Nome',
+            style: TextStyle(
+              color: AppColors.secondaryColor0,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+          ),
+        ),
         TextField(
           controller: _nomeController,
-          decoration: const InputDecoration(labelText: 'Nome'),
+          decoration: InputDecoration(
+            labelText: 'Nome',
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+          ),
+        ),
+        const SizedBox(height: 16),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            'Sobrenome',
+            style: TextStyle(
+              color: AppColors.secondaryColor0,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+          ),
         ),
         TextField(
           controller: _sobrenomeController,
-          decoration: const InputDecoration(labelText: 'Sobrenome'),
+          decoration: InputDecoration(
+            labelText: 'Sobrenome',
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+          ),
+        ),
+        const SizedBox(height: 16),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            'E-mail',
+            style: TextStyle(
+              color: AppColors.secondaryColor0,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+          ),
         ),
         TextField(
           controller: _emailController,
-          decoration: const InputDecoration(labelText: 'E-mail'),
+          decoration: InputDecoration(
+            labelText: 'E-mail',
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+          ),
         ),
-        const SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: () {
-            widget.onNext(
-              _nomeController.text,
-              _sobrenomeController.text,
-              _emailController.text,
-              _imageUrl.isNotEmpty ? _imageUrl : '1',
-            );
-          },
-          child: const Text('Próximo'),
+        const SizedBox(height: 40),
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: () {
+              widget.onNext(
+                _nomeController.text.trim(),
+                _sobrenomeController.text.trim(),
+                _emailController.text.trim(),
+                _imageUrl.isNotEmpty ? _imageUrl : '1',
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.brandColor0,
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            child: const Text(
+              'Próximo',
+              style: TextStyle(color: AppColors.letterColorLightBlue),
+            ),
+          ),
         ),
-        TextButton(
-          onPressed: () => Navigator.pushReplacementNamed(context, '/login'),
-          child: const Text('Já Possuo Conta', style: TextStyle(color: AppColors.letterColorBlackBlue)),
+        const SizedBox(height: 12),
+        SizedBox(
+          width: double.infinity,
+          child: OutlinedButton(
+            onPressed: () => Navigator.pushReplacementNamed(context, '/login'),
+            style: OutlinedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              side: const BorderSide(color: AppColors.secondaryColor0),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            child: const Text(
+              'Já Possuo Conta',
+              style: TextStyle(color: AppColors.letterColorBlackBlue),
+            ),
+          ),
         ),
       ],
     );
