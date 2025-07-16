@@ -25,7 +25,15 @@ class _LoginPageState extends State<LoginPage> {
 
     if (sucesso) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Login realizado com sucesso!')),
+        const SnackBar(
+          content: Text(
+            'Login feito com sucesso!',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: AppColors.confirmationColor,
+          duration: Duration(seconds: 1),
+        ),
       );
       Navigator.pushNamed(context, AppRoutes.homepage);
     } else {

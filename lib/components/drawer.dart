@@ -7,6 +7,7 @@ class DrawerComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: AppColors.backgroundColor,
       child: Column(
         children: [
           DrawerHeader(
