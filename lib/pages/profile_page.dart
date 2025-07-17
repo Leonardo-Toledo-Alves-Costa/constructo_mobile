@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:constructo_project/components/drawer.dart';
 import 'package:constructo_project/components/user_firebase.dart';
 import 'package:constructo_project/services/authentication/authentication_firebase_service.dart';
@@ -21,141 +19,163 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Column(
-          children: [
-            StreamBuilder(
-              stream: _userFirebase.userStream,
-              builder: (context, snapshot) {
-                final user = snapshot.data;
-                return Image.file(
-                  File(user?.imageURL ?? ''),
-                  scale: 0.5,
-                );
-              },
-            ),  
-            SizedBox(height: 30),
-            Text(
-              'Usuário',
-              style: TextStyle(
-                color: AppColors.letterColorLightBlue,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-              
-            ),
-          ],
-        ),
         toolbarHeight: 250,
+        backgroundColor: AppColors.secondaryColor0,
+        title: StreamBuilder(
+          stream: _userFirebase.userStream,
+          builder: (context, snapshot) {
+            final user = snapshot.data;
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 60, 
+                  backgroundImage:
+                      user?.imageURL != null && user!.imageURL.isNotEmpty
+                      ? NetworkImage(user.imageURL)
+                      : const AssetImage('assets/images/avatar.png')
+                            as ImageProvider,
+                  backgroundColor: Colors.transparent,
+                ),
+                const SizedBox(height: 16),
+                 Text(
+                  'Olá, ${user?.name}!',
+                  style: TextStyle(
+                    color: AppColors.letterColorLightBlue,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: StreamBuilder(stream: _userFirebase.userStream, builder: (context, snapshot) {
-              final user = snapshot.data;
-              return Column(
-                children: [
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Nome:',
-              style: TextStyle(
-                color: AppColors.letterColorBlackBlue,
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              user?.name ?? '',
-              style: TextStyle(
-                color: AppColors.letterColorBlackBlue,
-                fontSize: 18,
-              ),
-            ),
-            SizedBox(height: 20),
-            Text('Email:',
-              style: TextStyle(
-                color: AppColors.letterColorBlackBlue,
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 10),
-            Text(user?.email ?? '',
-              style: TextStyle(
-                color: AppColors.letterColorBlackBlue,
-                fontSize: 18,
-              ),
-            ),
-            SizedBox(height: 20),
-            Text('Codigo de identificação:',
-              style: TextStyle(
-                color: AppColors.letterColorBlackBlue,
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 10),
-            Text(user?.id ?? '',
-              style: TextStyle(
-                color: AppColors.letterColorBlackBlue,
-                fontSize: 18,
-              ),
-            ),
-            SizedBox(height: 20),
-            Text('Tipo de permissão:',
-              style: TextStyle(
-                color: AppColors.letterColorBlackBlue,
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 10),
-            Text(user?.role ?? '',
-              style: TextStyle(
-                color: AppColors.letterColorBlackBlue,
-                fontSize: 18,
-              ),
-            ),
-            SizedBox(height: 100),
-            SizedBox(
-              width: double.infinity,
-              child: TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, AppRoutes.mudarsenha);
-                },
-                style: TextButton.styleFrom(
-                  backgroundColor: AppColors.letterColorBlackBlue,
-                  foregroundColor: AppColors.letterColorLightBlue,
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+        child: StreamBuilder(
+          stream: _userFirebase.userStream,
+          builder: (context, snapshot) {
+            final user = snapshot.data;
+            return Column(
+              children: [
+                SizedBox(height: 20),
+                Text(
+                  'Nome:',
+                  style: TextStyle(
+                    color: AppColors.letterColorBlackBlue,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                child: Text('Alterar Senha'),
-              ),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () async {
-                await FirebaseAuthService().logout();
-                  if (context.mounted) {
-                  Navigator.pushReplacementNamed(context, AppRoutes.welcomepage); 
-              }  
-                },
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: AppColors.alertColor,
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+                Text(
+                  user?.name ?? '',
+                  style: TextStyle(
+                    color: AppColors.letterColorBlackBlue,
+                    fontSize: 18,
                   ),
                 ),
-                child: Text('Sair dessa conta'),
-              ),
-              ),
-            ],
+                SizedBox(height: 20),
+                Text(
+                  'Email:',
+                  style: TextStyle(
+                    color: AppColors.letterColorBlackBlue,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  user?.email ?? '',
+                  style: TextStyle(
+                    color: AppColors.letterColorBlackBlue,
+                    fontSize: 18,
+                  ),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  'Codigo de identificação:',
+                  style: TextStyle(
+                    color: AppColors.letterColorBlackBlue,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  user?.id ?? '',
+                  style: TextStyle(
+                    color: AppColors.letterColorBlackBlue,
+                    fontSize: 18,
+                  ),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  'Tipo de permissão:',
+                  style: TextStyle(
+                    color: AppColors.letterColorBlackBlue,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  user?.role ?? '',
+                  style: TextStyle(
+                    color: AppColors.letterColorBlackBlue,
+                    fontSize: 18,
+                  ),
+                ),
+                SizedBox(height: 100),
+                SizedBox(
+                  width: double.infinity,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, AppRoutes.mudarsenha);
+                    },
+                    style: TextButton.styleFrom(
+                      backgroundColor: AppColors.letterColorBlackBlue,
+                      foregroundColor: AppColors.letterColorLightBlue,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    child: Text('Alterar Senha'),
+                  ),
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      await FirebaseAuthService().logout();
+                      if (context.mounted) {
+                        Navigator.pushReplacementNamed(
+                          context,
+                          AppRoutes.welcomepage,
+                        );
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: AppColors.alertColor,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    child: Text('Sair dessa conta'),
+                  ),
+                ),
+              ],
             );
-          }),
+          },
+        ),
       ),
       drawer: DrawerComponent(),
     );
