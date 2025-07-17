@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class RegisterBaixaPage extends StatelessWidget {
   const RegisterBaixaPage({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
