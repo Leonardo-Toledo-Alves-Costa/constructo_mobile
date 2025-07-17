@@ -22,4 +22,14 @@ class Usuario {
       role: data['role'] ?? 'leitor',
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'employeeCode': id,
+      'nome': name,
+      'email': email,
+      'imageURL': imageURL,
+      'role': role,
+    };
+  }
 }

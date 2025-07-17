@@ -2,13 +2,13 @@
 import 'package:constructo_project/pages/change_password_page.dart';
 import 'package:constructo_project/pages/login_page.dart';
 import 'package:constructo_project/pages/products_page.dart';
+import 'package:constructo_project/pages/register_product_page.dart';
 import 'package:constructo_project/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:constructo_project/pages/signup_page.dart';
 import 'package:constructo_project/pages/welcome_page.dart';
-import 'package:constructo_project/components/baixa_list.dart';
 import 'package:constructo_project/components/stock_list.dart';
 import 'package:constructo_project/pages/filter_page.dart';
 import 'package:constructo_project/pages/home_page.dart';
@@ -32,16 +32,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => StockList()),
-        ChangeNotifierProvider(create: (context) => BaixaList()),
-      ],
-      child: MaterialApp(
-        title: 'Constructo App',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primaryColor: Color(0xFFB24E00),
+    return MaterialApp(
+      title: 'Constructo App',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: Color(0xFFB24E00),
         appBarTheme: AppBarTheme(
           centerTitle: true,
           backgroundColor: Color(0xFF061D3D),
@@ -78,9 +73,9 @@ class MyApp extends StatelessWidget {
           AppRoutes.cadastroBaixa: (context) => const RegisterBaixaPage(),
           AppRoutes.mudarsenha: (context) => const ChangePasswordPage(),
           AppRoutes.produtos: (context) => const ProductsPage(),
+          AppRoutes.cadastroProduto: (context) => const RegisterProductPage(),
         },
-      ),
-    );
+      );
   }
 }
   

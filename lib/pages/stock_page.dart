@@ -38,7 +38,7 @@ class StockPage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(width: 125),
+                  SizedBox(width: 115),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamed(context, '/cadastro_estoque');

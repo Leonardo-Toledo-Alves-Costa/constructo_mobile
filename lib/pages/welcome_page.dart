@@ -28,7 +28,7 @@ class WelcomePage extends StatelessWidget {
                     TextButton(onPressed: () => Navigator.pushNamed(context, AppRoutes.loginpage)
                     ,
                     style: ButtonStyle(backgroundColor: WidgetStateProperty.all(AppColors.brandColor0),
-                    fixedSize: WidgetStateProperty.all(Size(100, 45)),
+                    fixedSize: WidgetStateProperty.all(Size(110, 45)),
                     ), 
                     child: Text('Login'),
                     ),
@@ -39,7 +39,7 @@ class WelcomePage extends StatelessWidget {
                       );
                     },
                     style: ButtonStyle(backgroundColor: WidgetStateProperty.all(AppColors.secondaryColor0),
-                    fixedSize: WidgetStateProperty.all(Size(100, 45)),
+                    fixedSize: WidgetStateProperty.all(Size(110, 45)),
                     ), 
                     child: Text('Cadastro'),
                     ),

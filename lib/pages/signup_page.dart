@@ -144,7 +144,7 @@ class _SignupPageState extends State<SignupPage> {
                     controller: _senhaController,
                     obscureText: !_mostrarSenha,
                     decoration: InputDecoration(
-                      labelText: 'Senha',
+                      hintText: 'Senha',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -181,7 +181,7 @@ class _SignupPageState extends State<SignupPage> {
                     controller: _confirmarSenhaController,
                     obscureText: !_mostrarSenha,
                     decoration: InputDecoration(
-                      labelText: 'Confirmar Senha',
+                      hintText: 'Confirmar Senha',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),

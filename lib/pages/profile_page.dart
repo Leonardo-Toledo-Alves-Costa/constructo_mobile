@@ -29,9 +29,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 final user = snapshot.data;
                 return Image.file(
                   File(user?.imageURL ?? ''),
+                  scale: 0.5,
                 );
               },
-            ),
+            ),  
+            SizedBox(height: 30),
             Text(
               'Usuário',
               style: TextStyle(
@@ -39,6 +41,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
+              
             ),
           ],
         ),
