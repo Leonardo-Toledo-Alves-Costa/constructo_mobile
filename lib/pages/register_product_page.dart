@@ -1,7 +1,6 @@
 import 'package:constructo_project/components/product.dart';
 import 'package:constructo_project/components/product_firebase.dart';
 import 'package:constructo_project/components/product_image_picker.dart';
-import 'package:constructo_project/components/product_list_tile.dart';
 import 'package:constructo_project/utils/app_colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

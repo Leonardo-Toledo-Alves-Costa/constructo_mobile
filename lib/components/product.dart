@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Product with ChangeNotifier {
-  String? id = null;
+  String? id;
   String nome;
   String marca;
   String tipo;
