@@ -1,5 +1,6 @@
 import 'package:constructo_project/components/drawer.dart';
 import 'package:constructo_project/components/product_list_tile.dart';
+import 'package:constructo_project/pages/product_filter_page.dart';
 import 'package:constructo_project/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,15 @@ class ProductsPage extends StatefulWidget {
 }
 
 class _ProductsPageState extends State<ProductsPage> {
+  int _orderbyTipo = 0;
+  int _orderbyMarca = 0;
+  int _orderbyData = 0;
+  String? _marcaFiltro;
+  String? _tipoFiltro;
+  String? _dataFiltroDe;
+  String? _dataFiltroAte;
+  final _nomeController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,6 +81,7 @@ class _ProductsPageState extends State<ProductsPage> {
               width: 350,
               height: 50,
               child: TextField(
+                controller: _nomeController,
                 expands: true,
                 maxLines: null,
                 minLines: null,
@@ -91,6 +102,11 @@ class _ProductsPageState extends State<ProductsPage> {
                   ),
                   contentPadding: EdgeInsets.all(5.0),
                 ),
+                onChanged: (value) {
+                  setState(() {
+                    _nomeController.text = value;
+                  });
+                },
               ),
             ),
           ),
@@ -104,7 +120,18 @@ class _ProductsPageState extends State<ProductsPage> {
                     fixedSize: WidgetStateProperty.all(Size(125, 45)),
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/filtro_estoque');
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => ProductFilterPage(
+                        onFilter: (tipo, marca, dataDe, dataAte) {
+                          setState(() {
+                            _tipoFiltro = tipo;
+                            _marcaFiltro = marca;
+                            _dataFiltroDe = dataDe;
+                            _dataFiltroAte = dataAte;
+                          });
+                        },
+                      ),
+                    ));
                   },
                   child: Row(
                     children: [
@@ -130,20 +157,43 @@ class _ProductsPageState extends State<ProductsPage> {
                     child: DropdownButton(
                       borderRadius: BorderRadius.circular(15.0),
                       hint: Text('Ordenar por'),
-                      items: ['Quantidade', 'N° Lote', 'Data de cadastro', 'Tipo'].map((String value) {
+                      items: ['Marca ', 'Data de cadastro', 'Tipo'].map((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Text(value),
                         );
                       }).toList(),
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        setState(() {
+                          _orderbyData = 0;
+                          _orderbyTipo = 0;
+                          _orderbyMarca = 0;
+
+                          if (value == 'Marca ') {
+                            _orderbyMarca = 1;
+                          } else if (value == 'Data de cadastro') {
+                            _orderbyData = 1;
+                          } else if (value == 'Tipo') {
+                            _orderbyTipo = 1;
+                          }
+                        });
+                      },
                     ),
                   ),
                 )
               ],
             ),
           ),
-        Expanded(child: ProductListTile()),
+        Expanded(child: ProductListTile(
+          orderbyTipo: _orderbyTipo,
+          orderbyMarca: _orderbyMarca,
+          orderbyData: _orderbyData,
+          tipoFiltro: _tipoFiltro,
+          marcaFiltro: _marcaFiltro,
+          dataFiltroDe: _dataFiltroDe,
+          dataFiltroAte: _dataFiltroAte,
+          nomeFiltro: _nomeController.text.isNotEmpty ? _nomeController.text : null,
+        )),
         ],
       ),
       ),

@@ -1,6 +1,7 @@
 
 import 'package:constructo_project/pages/change_password_page.dart';
 import 'package:constructo_project/pages/login_page.dart';
+import 'package:constructo_project/pages/product_filter_page.dart';
 import 'package:constructo_project/pages/products_page.dart';
 import 'package:constructo_project/pages/register_product_page.dart';
 import 'package:constructo_project/utils/app_routes.dart';

@@ -6,9 +6,6 @@ class ProductFirebase {
 
   Future<void> addProduct(Product product) async {
     try {
-      print('Starting to add product...');
-      print('Product data: ${product.nome}, ${product.marca}, ${product.tipo}');
-
         Map<String, dynamic> productData = {
         'nome': product.nome,
         'marca': product.marca,
@@ -19,9 +16,7 @@ class ProductFirebase {
         'imageUrl': product.imageUrl,
         'usuarioEditou': product.usuarioEditou,
       };
-      print('Product data map: $productData');
       DocumentReference docRef = await _firestore.collection('produtos').add(productData);
-            print('Product added successfully with ID: ${docRef.id}');
 
     } catch (e) {
       print('Error adding product: $e');

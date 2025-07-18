@@ -27,14 +27,14 @@ class Product with ChangeNotifier {
   factory Product.fromMap(Map<String, dynamic> data) {
     return Product(
       id: data['id'] ?? '',
-      nome: data['nome'],
-      marca: data['marca'],
-      tipo: data['tipo'],
-      dataCadastro: DateTime.parse(data['dataCadastro']),
-      dataEditado: DateTime.parse(data['dataEditado']),
-      descricao: data['descricao'],
-      imageUrl: data['imageUrl'],
-      usuarioEditou: data['usuarioEditou'],
+      nome: data['nome'] ?? '',
+      marca: data['marca'] ?? '',
+      tipo: data['tipo'] ?? '',
+      dataCadastro:data['dataCadastro'] != null ? DateTime.parse(data['dataCadastro']) : DateTime.now(),
+      dataEditado: data['dataEditado'] != null ? DateTime.parse(data['dataEditado']) : DateTime.now(),
+      descricao: data['descricao'] ?? '',
+      imageUrl: data['imageUrl'] ?? '',
+      usuarioEditou: data['usuarioEditou'] ?? '',
     );
   }
 
