@@ -42,7 +42,7 @@ class _RegisterBaixaPageState extends State<RegisterBaixaPage> {
       final estoque = selectedStock.product;
       final quantidade = selectedStock.quantidade;
       final data = DateTime.now();
-      final usuario = _auth.currentUser?.uid;
+      final usuario = _auth.currentUser?.email;
 
       final baixa = Baixa(
         estoque: estoque,
@@ -106,10 +106,10 @@ class _RegisterBaixaPageState extends State<RegisterBaixaPage> {
           Row(
             children: [
               SizedBox(width: 10),
-              Text('$selected produtos selecionados',
+              Text( selected != null ? '$selected produtos selecionados' : 'Nenhum produto selecionado', 
                 style: TextStyle(
                   color: AppColors.letterColorBlackBlue,
-                  fontSize: 16,
+                  fontSize: 14,
                 ),
               ),
               SizedBox(width: 25),
