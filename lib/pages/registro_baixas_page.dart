@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 class RegistroBaixasPage extends StatelessWidget {
   const RegistroBaixasPage({super.key});
 
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

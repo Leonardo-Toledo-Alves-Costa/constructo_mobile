@@ -10,8 +10,6 @@ class ProductsPage extends StatefulWidget {
   @override
   State<ProductsPage> createState() => _ProductsPageState();
 }
-
-class _ProductsPageState extends State<ProductsPage> {
   int _orderbyTipo = 0;
   int _orderbyMarca = 0;
   int _orderbyData = 0;
@@ -20,6 +18,8 @@ class _ProductsPageState extends State<ProductsPage> {
   String? _dataFiltroDe;
   String? _dataFiltroAte;
   final _nomeController = TextEditingController();
+
+class _ProductsPageState extends State<ProductsPage> {
 
   @override
   Widget build(BuildContext context) {

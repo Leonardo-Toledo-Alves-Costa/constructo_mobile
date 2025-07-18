@@ -1,10 +1,68 @@
+import 'package:constructo_project/components/baixa.dart';
+import 'package:constructo_project/components/baixa_firebase.dart';
+import 'package:constructo_project/components/stock.dart';
 import 'package:constructo_project/components/stock_list_tile.dart';
 import 'package:constructo_project/utils/app_colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class RegisterBaixaPage extends StatelessWidget {
+class RegisterBaixaPage extends StatefulWidget {
   const RegisterBaixaPage({super.key});
 
+  @override
+  State<RegisterBaixaPage> createState() => _RegisterBaixaPageState();
+}
+
+class _RegisterBaixaPageState extends State<RegisterBaixaPage> {  
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final _baixaFirebase = BaixaFirebase();
+  var selected;
+  Stock selectedStock = Stock(
+    id: '',
+    product: '',
+    quantidade: '0',
+    dataCadastro: DateTime.now(),
+    lote: '0',
+    dataEditado: DateTime.now(),
+    tipo: 'Baixa',
+    usuarioEditou: '',
+    dataValidade: DateTime.now(),
+  );
+
+    void _cadastroBaixa() async {
+      if (selected == null || selected == 0) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Selecione pelo menos um produto para registrar a baixa.'),
+            backgroundColor: AppColors.alertColor,
+          ),
+        );
+        return;
+      }
+      final estoque = selectedStock.product;
+      final quantidade = selectedStock.quantidade;
+      final data = DateTime.now();
+      final usuario = _auth.currentUser?.uid;
+
+      final baixa = Baixa(
+        estoque: estoque,
+        quantidade: quantidade,
+        data: data,
+        usuario: usuario ?? '',
+      );
+
+      await _baixaFirebase.addBaixa(baixa);
+
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$selected Baixa Registrada com sucesso!'),
+          backgroundColor: AppColors.brandColor0,
+        ),
+      );
+      Navigator.of(context).pop();
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -33,84 +91,43 @@ class RegisterBaixaPage extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-          padding: const EdgeInsets.all(25.0),
-          child: SizedBox(
-            width: 350,
-            height: 50,
-            child: TextField(
-              expands: true,
-              maxLines: null,
-              minLines: null,
-              decoration: InputDecoration(
-                hint: Row(
-                  children: [
-                    Icon(Icons.search, color: AppColors.letterColorBlackBlue),
-                    SizedBox(width: 6),
-                    Text('Pesquisar', style: TextStyle(
-                    color: AppColors.letterColorBlackBlue,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    )),
-                  ],
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                contentPadding: EdgeInsets.all(5.0),
-              ),
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 0.0),
-          child: Row(
+          SizedBox(height: 20),
+          Expanded(child: StockListTile(
+            allowSelection: true, 
+            onSelectionChanged: (selectedStocks) {
+              setState(() {
+                selected = selectedStocks.length;
+                selectedStock = (selectedStocks.isNotEmpty ? selectedStocks[0] : null)!;
+
+              });
+            },
+          )),
+          SizedBox(height: 20),
+          Row(
             children: [
-              TextButton(
-                style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all(AppColors.letterColorBlackBlue),
-                  fixedSize: WidgetStateProperty.all(Size(125, 45)),
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/filtro_estoque');
-                },
-                child: Row(
-                  children: [
-                    Icon(Icons.filter_alt, color: AppColors.backgroundColor),
-                    SizedBox(width: 8),
-                    Text('Filtros',
-                        style: TextStyle(
-                        color: AppColors.backgroundColor,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
+              SizedBox(width: 10),
+              Text('$selected produtos selecionados',
+                style: TextStyle(
+                  color: AppColors.letterColorBlackBlue,
+                  fontSize: 16,
                 ),
               ),
-              const Spacer(),
-              Container(
-                decoration: BoxDecoration(
-                  color: AppColors.backgroundColor,
-                  border: Border.all(color: AppColors.backgroundColor),
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton(
-                    borderRadius: BorderRadius.circular(15.0),
-                    hint: Text('Ordenar por'),
-                    items: ['Quantidade', 'N° Lote', 'Data de cadastro', 'Tipo'].map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (value) {},
+              SizedBox(width: 25),
+              ElevatedButton(
+                onPressed: () {
+                  _cadastroBaixa();
+                },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white, 
+                  backgroundColor: AppColors.brandColor0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-              )
+                child: Text('Registrar Baixa'),
+              ),
             ],
           ),
-        ),
         ],
       ),
     );

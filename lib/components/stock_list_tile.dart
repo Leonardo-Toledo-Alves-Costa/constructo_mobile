@@ -16,8 +16,10 @@ class StockListTile extends StatefulWidget {
   String? dataFiltroAte;
   String? nomeFiltro;
   String? loteFiltro;
+  final bool allowSelection;
+  final Function(List<Stock>)? onSelectionChanged;
 
-  StockListTile({super.key, this.orderbyNumeroLote = 0, this.orderbyQuantidade = 0, this.orderbyTipo = 0, this.orderbyData = 0, this.tipoFiltro, this.dataFiltroDe, this.dataFiltroAte, this.nomeFiltro, this.loteFiltro});
+  StockListTile({super.key, this.orderbyNumeroLote = 0, this.orderbyQuantidade = 0, this.orderbyTipo = 0, this.orderbyData = 0, this.tipoFiltro, this.dataFiltroDe, this.dataFiltroAte, this.nomeFiltro, this.loteFiltro, this.allowSelection = false, this.onSelectionChanged});
 
   @override
   State<StockListTile> createState() => _StockListTileState();
@@ -29,10 +31,27 @@ class _StockListTileState extends State<StockListTile> {
   final _stockFirebase = StockFirebase();
 
   final _userFirebase = UserFirebase().userStream;
+  final Set<String> _selectedStocksIds = <String>{};
+  List<Stock> _currentStocks = [];
+
+  void _toggleSelection(Stock stock) {
+    setState(() {
+      if (_selectedStocksIds.contains(stock.id)) {
+        _selectedStocksIds.remove(stock.id);
+      } else {
+        _selectedStocksIds.add(stock.id!);
+      }
+      // Get selected stocks and call callback
+      final selectedStocks = _currentStocks.where((s) => _selectedStocksIds.contains(s.id)).toList();
+      widget.onSelectionChanged?.call(selectedStocks);
+    });
+  }
+  bool _isSelected(Stock stock) {
+    return _selectedStocksIds.contains(stock.id);
+  }
 
 
   Stream<List<Stock>> filterStreambyTipo(){
-
     return _stockFirebase.stockStream.map((stocks) {
       return stocks.where((stock) {
         final matchesTipo = stock.tipo == widget.tipoFiltro;
@@ -122,26 +141,52 @@ class _StockListTileState extends State<StockListTile> {
         if (!snapshot.hasData || snapshot.data!.isEmpty) {
           return Center(child: Text('Nenhum produto cadastrado.'));
         }
+        _currentStocks = snapshot.data!;
         return ListView.builder(
           itemCount: snapshot.data?.length ?? 0,
           itemBuilder: (context, index) {
+            final stock = snapshot.data![index];
+            final isSelected = _isSelected(stock);
             return Card(
               elevation: 10,
-              margin: EdgeInsets.all(5),  
+              margin: EdgeInsets.all(5),
+              color: Colors.white,
               child: Row(
                 children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Nome:', style: TextStyle(color: AppColors.secondaryColor0, fontSize: 14)),
-                          Text(snapshot.data?[index].product ?? 'Produto Generico', style: TextStyle(color: AppColors.secondaryColor0, fontSize: 14, fontWeight: FontWeight.bold)),
-                      Text('Data de cadastro:', style: TextStyle(color: AppColors.secondaryColor0, fontSize: 12)),
-                      Text(snapshot.data?[index].dataCadastro != null
-                          ? _dateFormat.format(snapshot.data![index].dataCadastro)
-                          : 'N/A', style: TextStyle(color: AppColors.secondaryColor0, fontSize: 12)),
-                      Text('Tipo:', style: TextStyle(color: AppColors.secondaryColor0, fontSize: 14)),
-                      Text(snapshot.data?[index].tipo ?? 'Tipo Genérico', style: TextStyle(color: AppColors.secondaryColor0, fontSize: 14)),
-                    ],
+                  if (widget.allowSelection) ...[
+                    GestureDetector(
+                      onTap: () => _toggleSelection(stock),
+                      child: Container(
+                        width: 30,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: AppColors.backgroundColor,
+                          border: Border.all(color: AppColors.secondaryColor0, width: 2),
+                        ),
+                        child: Icon(
+                          isSelected ? Icons.check : Icons.circle_outlined,
+                          color: isSelected ? AppColors.secondaryColor0 : Colors.transparent,
+                        ),
+                      ),
+                    ),
+                  ],
+
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Nome:', style: TextStyle(color: AppColors.secondaryColor0, fontSize: 14)),
+                        Text(snapshot.data?[index].product ?? 'Produto Generico', style: TextStyle(color: AppColors.secondaryColor0, fontSize: 14, fontWeight: FontWeight.bold)),
+                        Text('Data de cadastro:', style: TextStyle(color: AppColors.secondaryColor0, fontSize: 12)),
+                        Text(snapshot.data?[index].dataCadastro != null
+                            ? _dateFormat.format(snapshot.data![index].dataCadastro)
+                            : 'N/A', style: TextStyle(color: AppColors.secondaryColor0, fontSize: 12)),
+                        Text('Tipo:', style: TextStyle(color: AppColors.secondaryColor0, fontSize: 14)),
+                        Text(snapshot.data?[index].tipo ?? 'Tipo Genérico', style: TextStyle(color: AppColors.secondaryColor0, fontSize: 14)),
+                      ],
+                    ),
                   ),
                   SizedBox(width: 5),
                   Column(
