@@ -1,10 +1,26 @@
 import 'package:constructo_project/components/drawer.dart';
 import 'package:constructo_project/components/stock_list_tile.dart';
+import 'package:constructo_project/pages/stock_filter_page.dart';
 import 'package:constructo_project/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class StockPage extends StatelessWidget {
+class StockPage extends StatefulWidget {
   const StockPage({super.key});
+
+  @override
+  State<StockPage> createState() => _StockPageState();
+}
+  int _orderbyTipo = 0;
+  int _orderbyLote = 0;
+  int _orderbyData = 0;
+  int _orderbyQuantidade = 0;
+  String? _loteFiltro;
+  String? _tipoFiltro;
+  String? _dataFiltroDe;
+  String? _dataFiltroAte;
+  final _nomeController = TextEditingController();
+
+class _StockPageState extends State<StockPage> {
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +102,9 @@ class StockPage extends StatelessWidget {
                   ),
                   contentPadding: EdgeInsets.all(5.0),
                 ),
+                onChanged: (value) => setState(() {
+                  _nomeController.text = value;
+                }),
               ),
             ),
           ),
@@ -99,7 +118,18 @@ class StockPage extends StatelessWidget {
                     fixedSize: WidgetStateProperty.all(Size(125, 45)),
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/filtro_estoque');
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => StockFilterPage(
+                        onFilter: (tipo, lote, dataDe, dataAte) {
+                          setState(() {
+                            _tipoFiltro = tipo;
+                            _loteFiltro = lote;
+                            _dataFiltroDe = dataDe;
+                            _dataFiltroAte = dataAte;
+                          });
+                        },
+                      ),
+                    ));
                   },
                   child: Row(
                     children: [
@@ -131,7 +161,33 @@ class StockPage extends StatelessWidget {
                           child: Text(value),
                         );
                       }).toList(),
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        setState(() {
+                          _orderbyData = 0;
+                          _orderbyQuantidade = 0;
+                          _orderbyLote = 0;
+                          _orderbyTipo = 0;
+
+                          if (value == 'Quantidade') {
+                            _orderbyQuantidade = 1;
+                          } else if (value == 'N° Lote') {
+                            _orderbyLote = 1;
+                          } else if (value == 'Data de cadastro') {
+                            _orderbyData = 1;
+                          } else if (value == 'Tipo') {
+                            _orderbyTipo = 1;
+                          }
+                          if (value == 'Quantidade') {
+                            _orderbyQuantidade = 1;
+                          } else if (value == 'N° Lote') {
+                            _orderbyLote = 1;
+                          } else if (value == 'Data de cadastro') {
+                            _orderbyData = 1;
+                          } else if (value == 'Tipo') {
+                            _orderbyTipo = 1;
+                          }
+                        });
+                      },
                     ),
                   ),
                 )
@@ -139,7 +195,17 @@ class StockPage extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: StockListTile(),
+            child: StockListTile(
+              orderbyTipo: _orderbyTipo,
+              orderbyNumeroLote: _orderbyLote,
+              dataFiltroDe: _dataFiltroDe,
+              dataFiltroAte: _dataFiltroAte,
+              orderbyData: _orderbyData,
+              orderbyQuantidade: _orderbyQuantidade,
+              loteFiltro: _loteFiltro,
+              tipoFiltro: _tipoFiltro,
+              nomeFiltro: _nomeController.text.isNotEmpty ? _nomeController.text : null,
+            ),
           ),
         
         ],

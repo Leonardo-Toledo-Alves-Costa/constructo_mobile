@@ -111,7 +111,6 @@ class RegisterBaixaPage extends StatelessWidget {
             ],
           ),
         ),
-        Expanded(child: StockListTile()),
         ],
       ),
     );
