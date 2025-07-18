@@ -21,7 +21,7 @@ class Product with ChangeNotifier {
     required this.dataEditado,
     this.descricao,
     this.imageUrl,
-    this.usuarioEditou,
+    required this.usuarioEditou,
   });
 
   factory Product.fromMap(Map<String, dynamic> data) {

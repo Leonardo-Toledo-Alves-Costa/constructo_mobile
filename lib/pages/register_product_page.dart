@@ -65,7 +65,7 @@ class _RegisterProductPageState extends State<RegisterProductPage> {
       dataEditado: _dataEditado,
       descricao: descricao,
       imageUrl: _imageUrl,
-      usuarioEditou: usuarioEditou,
+      usuarioEditou: usuarioEditou!,
     );
 
     await _productFirebase.addProduct(product);
@@ -75,6 +75,46 @@ class _RegisterProductPageState extends State<RegisterProductPage> {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Produto cadastrado com sucesso!'),
+        backgroundColor: AppColors.confirmationColor,
+      ),
+    );
+
+    Navigator.pop(context);
+  }
+
+  void _updateProduct() async {
+    if (_product == null) return;
+
+    final nome = _nomeController.text;
+    final marca = _marcaController.text;
+    final tipo = _tipoController.text;
+    final descricao = _descricaoController.text;
+    final usuarioEditou = _auth.currentUser?.uid;
+
+    if (nome.isEmpty || marca.isEmpty || tipo.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Preencha todos os campos obrigatórios'),
+          backgroundColor: AppColors.alertColor,
+        ),
+      );
+      return;
+    }
+
+    _product!.nome = nome;
+    _product!.marca = marca;
+    _product!.tipo = tipo;
+    _product!.descricao = descricao;
+    _product!.imageUrl = _imageUrl;
+    _product!.usuarioEditou = usuarioEditou;
+
+    await _productFirebase.updateProduct(_product!);
+
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Produto atualizado com sucesso!'),
         backgroundColor: AppColors.confirmationColor,
       ),
     );
@@ -242,7 +282,7 @@ class _RegisterProductPageState extends State<RegisterProductPage> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      _cadastroProduto();
+                      _isEditing ? _updateProduct() : _cadastroProduto();
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white, backgroundColor: AppColors.brandColor1,
