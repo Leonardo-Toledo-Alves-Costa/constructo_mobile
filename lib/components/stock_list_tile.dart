@@ -30,13 +30,13 @@ class StockListTile extends StatelessWidget {
           itemBuilder: (context, index) {
             final data = docs[index].data() as Map<String, dynamic>;
 
-            final nome = data['estoque']?['nomeProduto'] ?? 'Sem nome';
+            final nome = data['nomeProduto'] ?? 'Sem nome';
             final quantidade = data['quantidade'] ?? 0;
             final lote = data['lote'] ?? 'Sem lote';
 
             final dataValidade = _formatarData(data['dataValidade']);
             final dataCadastro = _formatarData(data['dataCadastro']);
-            final dataEditado = _formatarData(data['dataEditado']);
+            final dataEditado = _formatarData(data['dataUltimaAtualizacao']);
 
             return Card(
               margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
